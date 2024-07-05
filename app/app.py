@@ -1,12 +1,14 @@
 import streamlit as st
 import pickle
 import numpy as np
-
+import os 
 # Load the model
-model = pickle.load(open('models/loan_prediction.sav', 'rb'))
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+model_path = os.path.join(current_dir,'models','loan_prediction.sav')
+model = pickle.load(open(model_path, 'rb'))
 
 st.set_page_config(page_title="Loan Prediction App", layout="centered")
-
 
 # Custom CSS
 def local_css(file_name):
@@ -15,7 +17,8 @@ def local_css(file_name):
 
 def main():
     # Apply custom CSS
-    local_css("templates/style.css")
+    css_file_path = os.path.join(current_dir,'templates','style.css')
+    local_css(css_file_path)
 
     # Page configuration
 
